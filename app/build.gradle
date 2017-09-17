@@ -9,7 +9,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     productFlavors {
         beijing {
@@ -30,18 +30,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0'
     compile 'com.github.pinguo-zhouwei:MZBannerView:v1.1.0'
-    compile 'com.didi.virtualapk:core:0.9.0'
-}
-apply plugin: 'com.didi.virtualapk.plugin'
-
-virtualApk {
-    packageId = 0x6f // the package id of Resources.
-    targetHost = '../../MyVictual/app' // the path of application module in host project.
-    applyHostMapping = true //optional, default value: true.
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'junit:junit:4.12'
 }
